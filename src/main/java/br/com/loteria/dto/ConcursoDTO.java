@@ -11,8 +11,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id", callSuper = false)
 public class ConcursoDTO extends BaseDTO {
+
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 
@@ -26,4 +28,5 @@ public class ConcursoDTO extends BaseDTO {
 	
 	private TipoJogoEnum tipoJogo;
 	
+	private SorteioDTO sorteio;
 }

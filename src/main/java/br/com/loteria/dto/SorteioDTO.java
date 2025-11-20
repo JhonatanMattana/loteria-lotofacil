@@ -12,8 +12,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id", callSuper = false)
 public class SorteioDTO extends BaseDTO {
+
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	
@@ -31,6 +33,12 @@ public class SorteioDTO extends BaseDTO {
 		if (this.dezenasLotofacil == null) {
 			this.dezenasLotofacil = new ArrayList<>();
 		}
+		dezena.setSorteio(this);
 		this.dezenasLotofacil.add(dezena);
+	}
+	
+	public void removeDezena(DezenaLotofacilDTO dezena) {
+		dezena.setSorteio(null);
+	    this.dezenasLotofacil.remove(dezena);
 	}
 }

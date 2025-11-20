@@ -8,12 +8,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id", callSuper = false)
 public class DezenaLotofacilDTO extends BaseDTO {
+
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	
 	private Byte dezena;
 	
 	private Byte ordem;
+	
+	private SorteioDTO sorteio;
 }
