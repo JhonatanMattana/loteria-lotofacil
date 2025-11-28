@@ -6,11 +6,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import br.com.loteria.enums.TipoJogoEnum;
 import lombok.EqualsAndHashCode;
@@ -22,7 +24,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id", callSuper = false)
-@Entity(name = "CONCURSO")
+@Entity
+@Table(name = "CONCURSO")
 public class Concurso extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
@@ -48,7 +51,7 @@ public class Concurso extends BaseEntity {
 	private TipoJogoEnum tipoJogo;
 	
 	@OneToOne
-	@JoinColumn(name = "ID_SORTEIO")
+	@JoinColumn(name = "ID_SORTEIO", foreignKey = @ForeignKey(name = "FK_Concurso_Sorteio"))
 	private Sorteio sorteio;
 
 }

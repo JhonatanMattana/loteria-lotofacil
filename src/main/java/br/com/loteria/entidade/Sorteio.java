@@ -11,7 +11,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,7 +24,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id", callSuper = false)
-@Entity(name = "SORTEIO")
+@Entity
+@Table(name = "SORTEIO")
 public class Sorteio extends BaseEntity {
 	
 	private static final long serialVersionUID = 1L;
@@ -43,7 +46,7 @@ public class Sorteio extends BaseEntity {
 	@OneToOne(mappedBy = "sorteio", fetch = FetchType.LAZY)
 	private Concurso concurso;
 
-	@OneToOne(mappedBy = "sorteio", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "sorteio", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<DezenaLotofacil> dezenasLotofacil;
 	
 	public void addDezenasLotofacil(DezenaLotofacil dezena) {

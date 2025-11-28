@@ -3,11 +3,13 @@ package br.com.loteria.entidade;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -18,7 +20,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id", callSuper = false)
-@Entity(name = "DEZENALOTOFACIL")
+@Entity
+@Table(name = "DEZENALOTOFACIL")
 public class DezenaLotofacil extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
@@ -34,6 +37,6 @@ public class DezenaLotofacil extends BaseEntity {
 	private Byte ordem;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_SORTEIO")
+	@JoinColumn(name = "ID_SORTEIO", foreignKey = @ForeignKey(name = "FK_DezenaLotofacil_Sorteio"))
 	private Sorteio sorteio;
 }
