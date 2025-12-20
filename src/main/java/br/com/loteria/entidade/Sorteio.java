@@ -8,9 +8,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -43,7 +45,8 @@ public class Sorteio extends BaseEntity {
 	@Column(name = "DATAAPURACAO")
 	private LocalDate dataApuracao;
 	
-	@OneToOne(mappedBy = "sorteio", fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "ID_CONCURSO", foreignKey = @ForeignKey(name = "FK_Sorteio_Concurso"))
 	private Concurso concurso;
 
 	@OneToMany(mappedBy = "sorteio", cascade = CascadeType.ALL, orphanRemoval = true)

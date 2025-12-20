@@ -6,12 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.loteria.enums.TipoJogoEnum;
@@ -49,9 +46,5 @@ public class Concurso extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "TIPOJOGO", nullable = false)
 	private TipoJogoEnum tipoJogo;
-	
-	@OneToOne
-	@JoinColumn(name = "ID_SORTEIO", foreignKey = @ForeignKey(name = "FK_Concurso_Sorteio"))
-	private Sorteio sorteio;
 
 }
