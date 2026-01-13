@@ -1,20 +1,30 @@
 package br.com.loteria.security.endpoint;
 
-import br.com.loteria.security.dto.LoginDTO;
-import br.com.loteria.security.dto.TokenDTO;
-import br.com.loteria.security.service.AuthService;
-import br.com.loteria.security.service.UsuarioService;
-import io.swagger.annotations.*;
-
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.NotAuthorizedException;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import br.com.loteria.security.dto.LoginDTO;
+import br.com.loteria.security.dto.TokenDTO;
+import br.com.loteria.security.service.AuthService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @Path("/auth")
 @RequestScoped
@@ -27,9 +37,6 @@ public class AuthEndPoint {
 
     @Inject
     private AuthService authService;
-
-    @Inject
-    private UsuarioService usuarioService;
 
     @POST
     @Path("/login")
@@ -51,7 +58,7 @@ public class AuthEndPoint {
         try {
             LOGGER.log(Level.INFO, "Tentativa de login para usuário: {0}", loginDTO.getUsuario());
 
-            TokenDTO tokenDTO = usuarioService.autenticar(loginDTO);
+            TokenDTO tokenDTO = authService.autenticar(loginDTO);
 
             LOGGER.log(Level.INFO, "Login realizado com sucesso para: {0}", loginDTO.getUsuario());
 
@@ -97,11 +104,12 @@ public class AuthEndPoint {
             }
 
             String token = authHeader.substring("Bearer ".length());
-            var usuario = usuarioService.validarToken(token);
+            var usuario = authService.validarToken(token);
 
             Map<String, Object> resposta = new HashMap<>();
             resposta.put("valido", true);
             resposta.put("usuario", usuario.getUsuario());
+            resposta.put("senha", usuario.getSenha());
             resposta.put("id", usuario.getId());
 
             return Response.ok(resposta).build();

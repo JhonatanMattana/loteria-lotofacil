@@ -1,6 +1,9 @@
 package br.com.loteria.security.service;
 
-import br.com.loteria.security.entidade.Usuario;
+import java.io.IOException;
+import java.security.Principal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.Priority;
 import javax.ejb.EJB;
@@ -12,10 +15,8 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.ext.Provider;
-import java.io.IOException;
-import java.security.Principal;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import br.com.loteria.security.entidade.Usuario;
 
 @Provider
 @Secured
@@ -25,7 +26,7 @@ public class AuthFilter implements ContainerRequestFilter {
     private static final Logger LOGGER = Logger.getLogger(AuthFilter.class.getName());
 
     @EJB
-    private UsuarioService usuarioService;
+    private AuthService authService;
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
@@ -41,7 +42,7 @@ public class AuthFilter implements ContainerRequestFilter {
 
         try {
             // Valida token e obtém usuário
-            Usuario usuario = usuarioService.validarToken(token);
+            Usuario usuario = authService.validarToken(token);
 
             // Cria SecurityContext customizado
             SecurityContext securityContext = new SecurityContext() {
