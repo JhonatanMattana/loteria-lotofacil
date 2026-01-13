@@ -32,6 +32,7 @@ public class AuthFilter implements ContainerRequestFilter {
         String authHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+        	LOGGER.log(Level.WARNING, "Token ausente");
             abort(requestContext, "Token ausente");
             return;
         }
