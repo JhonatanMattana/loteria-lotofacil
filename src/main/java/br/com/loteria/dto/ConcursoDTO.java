@@ -2,8 +2,9 @@ package br.com.loteria.dto;
 
 import java.time.LocalDate;
 
-import br.com.loteria.enums.TipoJogoEnum;
-import lombok.EqualsAndHashCode;
+import javax.persistence.MappedSuperclass;
+
+import br.com.loteria.enums.ModalidadeEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,12 +12,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id", callSuper = false)
-public class ConcursoDTO extends BaseDTO {
+@MappedSuperclass
+public abstract class ConcursoDTO extends BaseDTO {
 
 	private static final long serialVersionUID = 1L;
-
-	private Long id;
 
 	private Short numero;
 	
@@ -26,7 +25,6 @@ public class ConcursoDTO extends BaseDTO {
 
 	private Short numeroConcursoProximo;
 	
-	private TipoJogoEnum tipoJogo;
+	private ModalidadeEnum modalidade;
 	
-	private SorteioDTO sorteio;
 }

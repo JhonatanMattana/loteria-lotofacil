@@ -3,16 +3,11 @@ package br.com.loteria.entidade;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
 
-import br.com.loteria.enums.TipoJogoEnum;
-import lombok.EqualsAndHashCode;
+import br.com.loteria.enums.ModalidadeEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,16 +15,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id", callSuper = false)
-@Entity
-@Table(name = "CONCURSO")
-public class Concurso extends BaseEntity {
+@MappedSuperclass
+public abstract class Concurso extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 	
 	@Column(name = "NUMERO", nullable = false)
 	private Short numero;
@@ -44,7 +33,7 @@ public class Concurso extends BaseEntity {
 	private Short numeroConcursoProximo;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "TIPOJOGO", nullable = false)
-	private TipoJogoEnum tipoJogo;
-
+	@Column(name = "MODALIDADE", nullable = false)
+	private ModalidadeEnum modalidade;
+	
 }
