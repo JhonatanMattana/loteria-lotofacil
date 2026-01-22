@@ -35,7 +35,7 @@ public class ConcursoLotofacil extends Concurso {
 	private Long id;
 
 	@OneToOne(
-	    mappedBy = "concurso",
+	    mappedBy = "concursoLotofacil",
 	    fetch = FetchType.LAZY,
 	    cascade = CascadeType.ALL,
 	    orphanRemoval = true,

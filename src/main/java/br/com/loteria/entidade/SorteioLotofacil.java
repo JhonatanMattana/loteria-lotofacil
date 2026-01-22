@@ -5,10 +5,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -35,8 +39,17 @@ public class SorteioLotofacil extends Sorteio {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToMany(mappedBy = "sorteio", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "sorteioLotofacil", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<DezenaSorteioLotofacil> dezenasLotofacil;
+	
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(
+	    name = "ID_CONCURSOLOTOFACIL",
+	    foreignKey = @ForeignKey(name = "FK_Sorteio_Concurso"),
+	    nullable = false,
+	    unique = true
+	)
+	private ConcursoLotofacil concursoLotofacil;
 	
 	public void addDezenasLotofacil(DezenaSorteioLotofacil dezena) {
 		if (this.dezenasLotofacil == null) {

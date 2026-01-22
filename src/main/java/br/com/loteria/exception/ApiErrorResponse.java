@@ -9,28 +9,28 @@ public class ApiErrorResponse implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String message;
-    private String errorCode;
-    private int status;
+    private int errorCode;
+    private String statusDesc;
 
     public ApiErrorResponse() {
     }
 
-    public ApiErrorResponse(String message, String errorCode, int status) {
+    public ApiErrorResponse(String message, int errorCode, String statusDesc) {
         this.message = message;
         this.errorCode = errorCode;
-        this.status = status;
+        this.statusDesc = statusDesc;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public String getErrorCode() {
+    public int getErrorCode() {
         return errorCode;
     }
 
-    public int getStatus() {
-        return status;
+    public String getStatusString() {
+        return statusDesc;
     }
 
 }

@@ -11,19 +11,19 @@ public class LoteriaException extends RuntimeException implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private final HttpErrorStatusEnum status;
-    private final String errorCode;
+    private final int errorCode;
 
-    public LoteriaException(String message, HttpErrorStatusEnum status, String errorCode) {
+    public LoteriaException(String message, HttpErrorStatusEnum status) {
         super(message);
         this.status = status;
-        this.errorCode = errorCode;
+        this.errorCode = status.getStatusCode();
     }
 
     public HttpErrorStatusEnum getStatus() {
         return status;
     }
 
-    public String getErrorCode() {
+    public int getErrorCode() {
         return errorCode;
     }
 

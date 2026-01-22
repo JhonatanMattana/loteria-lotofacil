@@ -1,5 +1,6 @@
 package br.com.loteria.endpoint;
 
+import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -8,6 +9,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import br.com.loteria.dto.ResultadoLotoFacilDTO;
+import br.com.loteria.service.BaixarResultadoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -18,7 +21,10 @@ import io.swagger.annotations.ApiResponses;
 @Api(value = "Baixar Resultado", tags = {"Baixar Resultado"})
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public interface IBaixarResultadoEndPoint {
+public class BaixarResultadoEndPoint {
+	
+	@EJB
+	private BaixarResultadoService baixarResultadoService;
 
 	@GET
     @ApiOperation(value = "EndPoint para baixar resultado dos jogos")
@@ -29,6 +35,9 @@ public interface IBaixarResultadoEndPoint {
     })
     public Response porNumeroConcurso(
             @ApiParam(value = "Número do concurso", required = true) 
-            @QueryParam("numero") Integer numero);
+            @QueryParam("numero") Integer numero) {
+		ResultadoLotoFacilDTO porNumeroConcurso = baixarResultadoService.porNumeroConcurso(numero);
+		return Response.ok(porNumeroConcurso).build();
+	}
 
 }

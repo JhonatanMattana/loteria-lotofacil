@@ -16,7 +16,7 @@ public class LoteriaExceptionMapper implements ExceptionMapper<LoteriaException>
         ApiErrorResponse error = new ApiErrorResponse(
             ex.getMessage(),
             ex.getErrorCode(),
-            ex.getStatus().getStatusCode()
+            ex.getStatus().getDescicao()
         );
 
         return Response

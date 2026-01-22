@@ -5,11 +5,7 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
 
 import br.com.loteria.enums.ModalidadeEnum;
 import lombok.Getter;
@@ -40,13 +36,4 @@ public abstract class Sorteio extends BaseEntity {
 	@Column(name = "MODALIDADE", nullable = false)
 	private ModalidadeEnum modalidade;
 	
-	@OneToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(
-	    name = "ID_CONCURSO",
-	    foreignKey = @ForeignKey(name = "FK_Sorteio_Concurso"),
-	    nullable = false,
-	    unique = true
-	)
-	private Concurso concurso;
-
 }
