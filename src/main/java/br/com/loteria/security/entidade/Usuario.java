@@ -13,7 +13,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id", callSuper = false)
 @Entity
-@Table(name = "USUARIO")
+@Table(name = "USUARIO", uniqueConstraints = {
+		@UniqueConstraint(
+		    name = "UK_USUARIO_LOGIN",
+		    columnNames = {"USUARIO"}
+		)
+})
 public class Usuario extends BaseEntity {
 
     private static final long serialVersionUID = 1L;

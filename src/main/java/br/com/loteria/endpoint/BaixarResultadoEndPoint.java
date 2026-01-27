@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import br.com.loteria.dto.ResultadoLotoFacilDTO;
+import br.com.loteria.security.service.Secured;
 import br.com.loteria.service.BaixarResultadoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,6 +28,7 @@ public class BaixarResultadoEndPoint {
 	private BaixarResultadoService baixarResultadoService;
 
 	@GET
+	@Secured
     @ApiOperation(value = "EndPoint para baixar resultado dos jogos")
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Resultado baixado com sucesso"),
