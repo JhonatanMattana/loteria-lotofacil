@@ -1,5 +1,7 @@
 package br.com.loteria.dto;
 
+import java.time.LocalDate;
+
 import javax.persistence.MappedSuperclass;
 
 import lombok.Getter;
@@ -16,4 +18,6 @@ public abstract class DezenaSorteioDTO extends BaseDTO {
 	
 	private Byte ordem;
 
+	private LocalDate dataSorteio;
+	
 }

@@ -15,7 +15,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,7 +22,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "CONCURSOLOTOFACIL", uniqueConstraints = {
 		@UniqueConstraint(
-				name = "UK_CONCURSOLF_NUMER_MODALIDADE",
+				name = "UK_CONCURSOLF_NUM_MODALIDADE",
 	            columnNames = {"NUMERO", "MODALIDADE"})
 })
 public class ConcursoLotofacil extends Concurso {

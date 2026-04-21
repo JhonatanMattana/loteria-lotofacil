@@ -1,5 +1,6 @@
 package br.com.loteria.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.MappedSuperclass;
@@ -26,5 +27,7 @@ public abstract class ConcursoDTO extends BaseDTO {
 	private Short numeroConcursoProximo;
 	
 	private ModalidadeEnum modalidade;
+	
+	private BigDecimal valorArrecadado;
 	
 }

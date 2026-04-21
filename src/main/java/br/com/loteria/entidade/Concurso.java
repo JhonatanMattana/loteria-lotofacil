@@ -1,5 +1,6 @@
 package br.com.loteria.entidade;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -35,5 +36,8 @@ public abstract class Concurso extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "MODALIDADE", nullable = false)
 	private ModalidadeEnum modalidade;
+	
+	@Column(name = "VALORARRECADADO")
+	private BigDecimal valorArrecadado;
 	
 }

@@ -23,7 +23,7 @@ public abstract class DezenaSorteio extends BaseEntity {
 	@Column(name = "ORDEM")
 	private Byte ordem;
 	
-	@Column(name = "DATA")
-	private LocalDate data;
+	@Column(name = "DATASORTEIO")
+	private LocalDate dataSorteio;
 
 }
