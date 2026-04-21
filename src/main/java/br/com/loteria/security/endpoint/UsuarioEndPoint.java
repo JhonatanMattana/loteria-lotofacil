@@ -28,7 +28,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @Path("/usuario")
-@Api(value = "Usuário", tags = {"usuário"})
+@Api(value = "Usuário", tags = {"Usuário"})
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UsuarioEndPoint {

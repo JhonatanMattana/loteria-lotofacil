@@ -56,10 +56,10 @@ public class AuthService {
             throw new IllegalArgumentException("LoginDTO não pode ser nulo");
         }
         if (loginDTO.getUsuario() == null || loginDTO.getUsuario().trim().isEmpty()) {
-            throw new IllegalArgumentException("Usuário não pode ser vazio");
+            throw new IllegalArgumentException("Usuário não pode estar vazio");
         }
         if (loginDTO.getSenha() == null || loginDTO.getSenha().trim().isEmpty()) {
-            throw new IllegalArgumentException("Senha não pode ser vazia");
+            throw new IllegalArgumentException("Senha não pode estar vazia");
         }
     }
 

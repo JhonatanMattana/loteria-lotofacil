@@ -46,6 +46,7 @@ public class AuthFilter implements ContainerRequestFilter {
 
             // Cria SecurityContext customizado
             SecurityContext securityContext = new SecurityContext() {
+            	
                 @Override
                 public Principal getUserPrincipal() {
                     return () -> usuario.getUsuario();

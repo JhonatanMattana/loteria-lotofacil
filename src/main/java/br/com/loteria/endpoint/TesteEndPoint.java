@@ -10,7 +10,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 @Path("/teste")
-@Api(value = "Testes", tags = {"testes"})
+@Api(value = "Testes", tags = {"Testes"})
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class TesteEndPoint {
