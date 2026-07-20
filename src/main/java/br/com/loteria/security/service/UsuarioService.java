@@ -8,6 +8,8 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ws.rs.NotAuthorizedException;
 
+import br.com.loteria.enums.HttpErrorStatusEnum;
+import br.com.loteria.exception.LoteriaException;
 import br.com.loteria.security.dto.UsuarioDTO;
 import br.com.loteria.security.entidade.Usuario;
 import br.com.loteria.security.repository.UsuarioRepository;
@@ -52,7 +54,7 @@ public class UsuarioService {
     
     public void deletar(String usuario) {
     	if (!usuarioRepository.existsByUsuario(usuario)) {
-            throw new IllegalArgumentException("Usuário não cadastrado no Sistema!!!");
+            throw new LoteriaException("Usuário não cadastrado no Sistema!!!", HttpErrorStatusEnum.NOT_FOUND);
         }
     	
     	Usuario usuarioEncontrado = usuarioRepository.findByUsuario(usuario).get();

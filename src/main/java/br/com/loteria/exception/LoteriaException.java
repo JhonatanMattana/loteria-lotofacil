@@ -3,8 +3,11 @@ package br.com.loteria.exception;
 import java.io.Serial;
 import java.io.Serializable;
 
+import javax.ejb.ApplicationException;
+
 import br.com.loteria.enums.HttpErrorStatusEnum;
 
+@ApplicationException(rollback = true)
 public class LoteriaException extends RuntimeException implements Serializable {
 
 	@Serial
