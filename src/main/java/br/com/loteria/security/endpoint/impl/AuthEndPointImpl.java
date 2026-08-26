@@ -14,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import br.com.loteria.exception.CredenciaisInvalidasException;
 import br.com.loteria.security.dto.LoginDTO;
 import br.com.loteria.security.dto.TokenDTO;
 import br.com.loteria.security.endpoint.IAuthEndPoint;
@@ -43,7 +44,7 @@ public class AuthEndPointImpl implements IAuthEndPoint {
 
             return Response.ok(tokenDTO).build();
 
-        } catch (NotAuthorizedException e) {
+        } catch (CredenciaisInvalidasException e) {
             LOGGER.log(Level.WARNING, "Login falhou: {0}", e.getMessage());
             return Response.status(Response.Status.UNAUTHORIZED)
                     .entity(criarMensagemErro("Credenciais inválidas"))

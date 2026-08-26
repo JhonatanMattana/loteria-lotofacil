@@ -5,6 +5,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ws.rs.NotAuthorizedException;
 
+import br.com.loteria.exception.CredenciaisInvalidasException;
 import br.com.loteria.security.dto.LoginDTO;
 import br.com.loteria.security.dto.TokenDTO;
 import br.com.loteria.security.entidade.Usuario;
@@ -33,7 +34,7 @@ public class AuthService {
         Usuario usuario = usuarioService.getUsuario(loginDTO.getUsuario());
 
         if (!validarSenha(loginDTO.getSenha(), usuario.getSenha())) {
-            throw new NotAuthorizedException("Credenciais inválidas");
+            throw new CredenciaisInvalidasException("Credenciais inválidas");
         }
 
         String token = TokenService.gerarToken(usuario.getUsuario());
