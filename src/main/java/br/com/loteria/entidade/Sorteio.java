@@ -32,6 +32,9 @@ public abstract class Sorteio extends BaseEntity {
 	@Column(name = "DATAAPURACAO")
 	private LocalDate dataApuracao;
 	
+	@Column(name = "DIAAPURACAO")
+	private String diaApuracao;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "MODALIDADE", nullable = false)
 	private ModalidadeEnum modalidade;

@@ -2,43 +2,34 @@ package br.com.loteria.endpoint;
 
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.loteria.dto.ResultadoLotoFacilDTO;
-import br.com.loteria.security.service.Secured;
+import br.com.loteria.dto.BaixarResultadoDTO;
+import br.com.loteria.dto.VerificarSorteioSiteDTO;
 import br.com.loteria.service.BaixarResultadoService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
 @Path("/baixarresultado")
 @Api(value = "Baixar Resultado", tags = {"Baixar Resultado"})
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class BaixarResultadoEndPoint {
+public class BaixarResultadoEndPoint implements IBaixarResultadoEndPoint {
 	
 	@EJB
 	private BaixarResultadoService baixarResultadoService;
 
-	@GET
-	@Secured
-    @ApiOperation(value = "EndPoint para baixar resultado dos jogos")
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Resultado baixado com sucesso"),
-        @ApiResponse(code = 401, message = "Baixar resultado, acesso não autorizado"),
-        @ApiResponse(code = 404, message = "Ocorreu um erro ao baixar resultado")
-    })
-    public Response porNumeroConcurso(
-            @ApiParam(value = "Número do concurso", required = true) 
-            @QueryParam("numero") Integer numero) {
-		ResultadoLotoFacilDTO porNumeroConcurso = baixarResultadoService.porNumeroConcurso(numero);
+	@Override
+	public Response verificarSorteioSite(Integer numeroConcurso, String modalidade) {
+		VerificarSorteioSiteDTO resultado = baixarResultadoService.verificarSorteioSite(numeroConcurso, modalidade);
+		return Response.ok(resultado).build();
+	}
+
+	@Override
+    public Response porNumeroConcurso(Integer numeroConcurso, String modalidade) {
+		BaixarResultadoDTO porNumeroConcurso = baixarResultadoService.porNumeroConcurso(numeroConcurso, modalidade);
 		return Response.ok(porNumeroConcurso).build();
 	}
 
