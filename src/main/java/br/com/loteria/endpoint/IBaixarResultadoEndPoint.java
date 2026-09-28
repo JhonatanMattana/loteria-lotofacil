@@ -18,7 +18,7 @@ public interface IBaixarResultadoEndPoint {
 
 	@GET
 	@Secured
-	@Path("/verificarsorteio")
+	@Path("/verificar-sorteio")
 	@ApiOperation(value = "EndPoint para verificar se houve sorteio")
 	@ApiResponses(value = {
         @ApiResponse(code = 200, message = "Sorteio verificado com sucesso"),
@@ -33,7 +33,7 @@ public interface IBaixarResultadoEndPoint {
 
 	@GET
 	@Secured
-	@Path("/pornumeroconcurso")
+	@Path("/por-numero-concurso")
 	@ApiOperation(value = "EndPoint para baixar resultado dos jogos")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Resultado baixado com sucesso"),

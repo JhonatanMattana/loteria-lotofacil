@@ -12,7 +12,7 @@ import br.com.loteria.dto.VerificarSorteioSiteDTO;
 import br.com.loteria.service.BaixarResultadoService;
 import io.swagger.annotations.Api;
 
-@Path("/baixarresultado")
+@Path("/baixar-resultado")
 @Api(value = "Baixar Resultado", tags = {"Baixar Resultado"})
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)

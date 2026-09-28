@@ -18,7 +18,7 @@ public class BaixarResultadoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer numero;
-    private List<String> listaDezenas;
+    private List<Integer> listaDezenas;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataApuracao;
 }
