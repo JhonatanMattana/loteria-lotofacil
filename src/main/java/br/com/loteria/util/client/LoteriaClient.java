@@ -18,43 +18,54 @@ public class LoteriaClient {
     // Exemplo de URL válida: portaldeloterias/api/lotofacil/3370
     private static final String URL_BASE = "https://servicebus2.caixa.gov.br/portaldeloterias/api";
 
-    private Client client;
-
     public BaixarResultadoDTO buscarResultado(Integer numeroConcurso, String modalidade) {
+    	Client client = ClientBuilder.newClient();
+    	
+    	try {
+    		Response response = request(client, numeroConcurso, modalidade);
+			
+    		try {
+    			if (response.getStatus() != 200) {
+                    throw new LoteriaException("Erro ao chamar API da Caixa", HttpErrorStatusEnum.INTERNAL_ERROR);
+                }
 
-        Response response = request(numeroConcurso, modalidade);
+                BaixarResultadoDTO resultado = response.readEntity(BaixarResultadoDTO.class);
+                resultado.setModalidade(ModalidadeEnum.valueOf(modalidade.toUpperCase()));
 
-        if (response.getStatus() != 200) {
-            throw new LoteriaException("Erro ao chamar API da Caixa", HttpErrorStatusEnum.INTERNAL_ERROR);
-        }
-
-        BaixarResultadoDTO resultado = response.readEntity(BaixarResultadoDTO.class);
-        resultado.setModalidade(ModalidadeEnum.valueOf(modalidade.toUpperCase()));
-
-        response.close();
-        getClient().close();
-
-        return resultado;
+                return resultado;
+			} finally {
+				response.close();				
+			}
+		} finally {
+			client.close();
+		}
+        
     }
 
     public Boolean verificarSorteioSite(Integer numeroConcurso, String modalidade) {
-        Response response = request(numeroConcurso, modalidade);
+    	Client client = ClientBuilder.newClient();
+    	
+    	try {
+    		Response response = request(client, numeroConcurso, modalidade);
+			
+    		try {
+    			if (response.getStatus() != 200) {
+    				throw new LoteriaException("Erro ao chamar API da Caixa", HttpErrorStatusEnum.INTERNAL_ERROR);
+    			}
+    			
+    			boolean resultado = response.hasEntity();
+    			
+    			return resultado;
+			} finally {
+				response.close();
+			}
+		} finally {
+			client.close();
+		}
 
-        if (response.getStatus() != 200) {
-            throw new LoteriaException("Erro ao chamar API da Caixa", HttpErrorStatusEnum.INTERNAL_ERROR);
-        }
-
-        boolean resultado = response.hasEntity();
-
-        response.close();
-        getClient().close();
-
-        return resultado;
     }
 
-    private Response request(Integer numeroConcurso, String modalidade) {
-        Client client = getClient();
-
+    private Response request(Client client, Integer numeroConcurso, String modalidade) {
         final String URL = getRrl(modalidade);
 
         WebTarget target = client
@@ -70,12 +81,6 @@ public class LoteriaClient {
         return URL_BASE + "/" + getModalidadeLowerCase(modalidade);
     }
 
-    private Client getClient() {
-        if (client == null) {
-            client = ClientBuilder.newClient();
-        }
-        return client;
-    }
 
     private String getModalidadeLowerCase(String modalidade) {
         return ModalidadeEnum.getDescricaoLowerCase(modalidade);
