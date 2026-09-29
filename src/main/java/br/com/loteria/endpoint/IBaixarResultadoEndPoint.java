@@ -4,10 +4,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
+import br.com.loteria.dto.BaixarResultadoDTO;
 import br.com.loteria.security.service.Secured;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -45,5 +47,18 @@ public interface IBaixarResultadoEndPoint {
 			@QueryParam("numeroConcurso") @Valid @NotNull Integer numeroConcurso,
 			@ApiParam(value = "Modalidade concurso", required = true)
 			@QueryParam("modalidade") @Valid @NotBlank String modalidade);
+	
+	@POST
+	@Secured
+	@Path("/salvar")
+	@ApiOperation(value = "EndPoint para salvar resultado do jogo")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Resultado salvo com sucesso"),
+			@ApiResponse(code = 401, message = "Salvar resultado, acesso não autorizado"),
+			@ApiResponse(code = 404, message = "Ocorreu um erro ao salvar resultado")
+	})
+	public Response salvarResultado(
+			@ApiParam(value = "Modalidade concurso", required = true)
+			@Valid BaixarResultadoDTO baixarResultadoDTO);
 
 }

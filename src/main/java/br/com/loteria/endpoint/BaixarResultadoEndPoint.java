@@ -33,4 +33,10 @@ public class BaixarResultadoEndPoint implements IBaixarResultadoEndPoint {
 		return Response.ok(porNumeroConcurso).build();
 	}
 
+	@Override
+	public Response salvarResultado(BaixarResultadoDTO baixarResultadoDTO) {
+		baixarResultadoService.salvarResultado(baixarResultadoDTO);
+	    return Response.noContent().build();
+	}
+
 }

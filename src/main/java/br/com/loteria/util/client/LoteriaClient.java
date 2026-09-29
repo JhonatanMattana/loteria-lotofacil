@@ -29,6 +29,7 @@ public class LoteriaClient {
         }
 
         BaixarResultadoDTO resultado = response.readEntity(BaixarResultadoDTO.class);
+        resultado.setModalidade(ModalidadeEnum.valueOf(modalidade.toUpperCase()));
 
         response.close();
         getClient().close();
@@ -66,7 +67,7 @@ public class LoteriaClient {
     }
 
     private String getRrl(String modalidade) {
-        return URL_BASE + "/" + getModalidade(modalidade);
+        return URL_BASE + "/" + getModalidadeLowerCase(modalidade);
     }
 
     private Client getClient() {
@@ -76,7 +77,7 @@ public class LoteriaClient {
         return client;
     }
 
-    private String getModalidade(String modalidade) {
+    private String getModalidadeLowerCase(String modalidade) {
         return ModalidadeEnum.getDescricaoLowerCase(modalidade);
     }
 
