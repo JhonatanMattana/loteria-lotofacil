@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 
 import br.com.loteria.dto.BaixarResultadoDTO;
 import br.com.loteria.dto.VerificarSorteioSiteDTO;
-import br.com.loteria.service.BaixarResultadoService;
+import br.com.loteria.service.local.BaixarResultadoServiceLocal;
 import io.swagger.annotations.Api;
 
 @Path("/baixar-resultado")
@@ -19,7 +19,7 @@ import io.swagger.annotations.Api;
 public class BaixarResultadoEndPoint implements IBaixarResultadoEndPoint {
 	
 	@EJB
-	private BaixarResultadoService baixarResultadoService;
+	private BaixarResultadoServiceLocal baixarResultadoService;
 
 	@Override
 	public Response verificarSorteioSite(Integer numeroConcurso, String modalidade) {

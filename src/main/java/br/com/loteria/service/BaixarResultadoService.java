@@ -1,6 +1,9 @@
 package br.com.loteria.service;
 
+import java.util.Optional;
+
 import javax.ejb.EJB;
+import javax.ejb.Local;
 import javax.ejb.Stateless;
 
 import br.com.loteria.dto.BaixarResultadoDTO;
@@ -8,12 +11,17 @@ import br.com.loteria.dto.VerificarSorteioSiteDTO;
 import br.com.loteria.entidade.ConcursoLotofacil;
 import br.com.loteria.entidade.DezenaSorteioLotofacil;
 import br.com.loteria.entidade.SorteioLotofacil;
+import br.com.loteria.enums.HttpErrorStatusEnum;
+import br.com.loteria.exception.LoteriaException;
 import br.com.loteria.repository.local.BaixarResultadoRepositoryLocal;
+import br.com.loteria.service.local.BaixarResultadoServiceLocal;
+import br.com.loteria.service.local.ConcursoServiceLocal;
 import br.com.loteria.util.client.DateUtil;
 import br.com.loteria.util.client.LoteriaClient;
 
 @Stateless
-public class BaixarResultadoService {
+@Local(BaixarResultadoServiceLocal.class)
+public class BaixarResultadoService implements BaixarResultadoServiceLocal {
 	
 	@EJB
 	private BaixarResultadoRepositoryLocal baixarResultadoRepository;
@@ -21,10 +29,15 @@ public class BaixarResultadoService {
 	@EJB
 	private LoteriaClient lotofacilClient;
 	
+	@EJB
+	private ConcursoServiceLocal concursoService;
+	
+	@Override
 	public BaixarResultadoDTO porNumeroConcurso(Integer numero, String modalidade) {
 		return lotofacilClient.buscarResultado(numero, modalidade);
 	}
 
+	@Override
 	public VerificarSorteioSiteDTO verificarSorteioSite(Integer numeroConcurso, String modalidade) {
 		try {
 			lotofacilClient.verificarSorteioSite(numeroConcurso, modalidade);
@@ -36,8 +49,27 @@ public class BaixarResultadoService {
 		}
 	}
 	
+	@Override
 	public void salvarResultado(BaixarResultadoDTO dto) {
-        ConcursoLotofacil concurso = new ConcursoLotofacil();
+		validarSalvarResultado(dto);
+		
+        ConcursoLotofacil concurso = montarObjetoParaSalvar(dto);
+
+        baixarResultadoRepository.salvarConcurso(concurso);
+    }
+	
+	private void validarSalvarResultado(BaixarResultadoDTO dto) {
+		Optional<ConcursoLotofacil> concursoOptional = concursoService.buscarPorNumeroConcurso(dto.getNumero());
+		
+		if (concursoOptional.isPresent()) {
+			String message = String.format("Concurso N° \"%d\" já esta salvo.", dto.getNumero());
+			throw new LoteriaException(message, HttpErrorStatusEnum.INTERNAL_ERROR);
+		}
+		
+	}
+
+	private ConcursoLotofacil montarObjetoParaSalvar(BaixarResultadoDTO dto) {
+		ConcursoLotofacil concurso = new ConcursoLotofacil();
 
         concurso.setNumero(dto.getNumero());
         concurso.setDataProximoConcurso(DateUtil.converterParaLocalDate(dto.getDataProximoConcurso()));
@@ -72,8 +104,7 @@ public class BaixarResultadoService {
                 ordem++;
             }
         }
-
-        baixarResultadoRepository.salvarConcurso(concurso);
-    }
+		return concurso;
+	}
 
 }
