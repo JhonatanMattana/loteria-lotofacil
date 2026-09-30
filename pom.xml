@@ -1,175 +1,162 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>br.com.loteria</groupId>
-	<artifactId>loteria-lotofacil</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
-	<url>http://maven.apache.org</url>
-	
-	<properties>
-		<java.version>17</java.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<failOnMissingWebXml>false</failOnMissingWebXml>
-	</properties>
-	
-	<dependencies>
-		<!-- secured -->
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-api</artifactId>
-			<version>0.11.5</version>
-		</dependency>
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		<modelVersion>4.0.0</modelVersion>
+		
+		<groupId>br.com.loteria</groupId>
+		<artifactId>loteria-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<packaging>pom</packaging>
+		
+		<modules>
+			<module>loteria-common</module>
+			<module>loteria-security</module>
+			<module>loteria-lotofacil</module>
+			<module>loteria-megasena</module>
+			<module>loteria-api</module>
+		</modules>
 
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-impl</artifactId>
-			<version>0.11.5</version>
-		</dependency>
+		<properties>
+			<java.version>17</java.version>
+			<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+			<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		</properties>
 
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-jackson</artifactId>
-			<version>0.11.5</version>
-		</dependency>
+		<dependencyManagement>
+			<dependencies>
+				<dependency>
+					<groupId>javax</groupId>
+					<artifactId>javaee-api</artifactId>
+					<version>8.0</version>
+				</dependency>
+				
+				<dependency>
+					<groupId>org.projectlombok</groupId>
+					<artifactId>lombok</artifactId>
+					<version>1.18.30</version>
+				</dependency>
+				
+				<dependency>
+					<groupId>io.swagger</groupId>
+					<artifactId>swagger-annotations</artifactId>
+					<version>1.6.11</version>
+				</dependency>
+				
+				<dependency>
+					<groupId>io.jsonwebtoken</groupId>
+					<artifactId>jjwt-api</artifactId>
+					<version>0.11.5</version>
+				</dependency>
+				
+				<dependency>
+					<groupId>io.jsonwebtoken</groupId>
+					<artifactId>jjwt-impl</artifactId>
+					<version>0.11.5</version>
+				</dependency>
+				
+				<dependency>
+					<groupId>io.jsonwebtoken</groupId>
+					<artifactId>jjwt-jackson</artifactId>
+					<version>0.11.5</version>
+				</dependency>
+				
+				<dependency>
+					<groupId>com.fasterxml.jackson.datatype</groupId>
+					<artifactId>jackson-datatype-jsr310</artifactId>
+					<version>2.15.2</version>
+				</dependency>
+				
+				<dependency>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-annotations</artifactId>
+					<version>2.15.2</version>
+				</dependency>
+				
+				<dependency>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-core</artifactId>
+					<version>5.6.15.Final</version>
+				</dependency>
+				
+				<dependency>
+					<groupId>mysql</groupId>
+					<artifactId>mysql-connector-java</artifactId>
+					<version>8.0.33</version>
+				</dependency>
+				
+				<dependency>
+					<groupId>io.swagger</groupId>
+					<artifactId>swagger-jaxrs</artifactId>
+					<version>1.6.11</version>
+				</dependency>
+				
+				<dependency>
+					<groupId>io.swagger</groupId>
+					<artifactId>swagger-models</artifactId>
+					<version>1.6.11</version>
+				</dependency>
+				
+				<dependency>
+					<groupId>org.webjars</groupId>
+					<artifactId>swagger-ui</artifactId>
+					<version>3.52.5</version>
+				</dependency>
+				
+				<dependency>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+					<version>20.0</version>
+				</dependency>
+				
+				<dependency>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+					<version>4.13.2</version>
+				</dependency>
+				
+				<dependency>
+					<groupId>org.mockito</groupId>
+					<artifactId>mockito-core</artifactId>
+					<version>3.12.4</version>
+				</dependency>
+			</dependencies>
+		</dependencyManagement>
 
-		<!-- Jackson Java 8 Date/Time -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-jsr310</artifactId>
-			<version>2.15.2</version>
-		</dependency>
-
-		<!-- Java EE completo (inclui JAX-RS) -->
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>8.0</version>
-			<scope>provided</scope>
-		</dependency>
+		<build>
+			<pluginManagement>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>3.11.0</version>
+						<configuration>
+							<annotationProcessorPaths>
+								<path>
+									<groupId>org.projectlombok</groupId>
+									<artifactId>lombok</artifactId>
+									<version>1.18.30</version>
+								</path>
+							</annotationProcessorPaths>
+							<encoding>UTF-8</encoding>
+						<release>${java.version}</release>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-resources-plugin</artifactId>
+						<version>3.3.0</version>
+						<configuration>
+							<encoding>UTF-8</encoding>
+						</configuration>
+					</plugin>
+				</plugins>
+			</pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+				</plugin>
+			</plugins>
+		</build>
 		
-		<!-- JUnit 4 -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.2</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<!-- Mockito para JUnit 4 -->
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>3.12.4</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<!-- Hibernate Core -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>5.6.15.Final</version>
-			<scope>provided</scope> <!-- WildFly já tem Hibernate -->
-		</dependency>
-		
-		<!-- MySQL Connector -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.33</version>
-		</dependency>
-		
-		<!-- Lombok -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.30</version>
-			<scope>provided</scope>
-		</dependency>
-		
-		<!-- Swagger para JAX-RS (Java EE 8 - javax) -->
-		<dependency>
-			<groupId>io.swagger</groupId>
-			<artifactId>swagger-jaxrs</artifactId>
-			<version>1.6.11</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.ws.rs</groupId>
-					<artifactId>jsr311-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
-		<dependency>
-		    <groupId>io.swagger</groupId>
-		    <artifactId>swagger-models</artifactId>
-		    <version>1.6.11</version>
-		</dependency>
-
-		
-		<!-- Swagger UI -->
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>swagger-ui</artifactId>
-			<version>3.52.5</version>
-		</dependency>
-		
-		<!-- Swagger annotations -->
-		<dependency>
-			<groupId>io.swagger</groupId>
-			<artifactId>swagger-annotations</artifactId>
-			<version>1.6.11</version>
-		</dependency>
-		
-		<!-- Guava compatível com WildFly -->
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>20.0</version>
-		</dependency>
-	</dependencies>
-	
-	<build>
-		<finalName>loteria-lotofacil</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-					<release>17</release>
-        			<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>3.3.2</version>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
-			</plugin>
-			
-			<!-- Plugin para limpar melhor -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>3.2.0</version>
-			</plugin>
-			
-			<!-- Plugin de recursos -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.3.0</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-</project>
+	</project>

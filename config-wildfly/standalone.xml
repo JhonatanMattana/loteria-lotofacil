@@ -158,20 +158,20 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:jboss/datasources/LoteriaDS" pool-name="LoteriaDS" enabled="true" use-java-context="true">
-			        <connection-url>jdbc:mysql://localhost:3306/loteria-lotofacil?useSSL=false&amp;serverTimezone=UTC</connection-url>
-			        <driver>mysql</driver>
-			        <security>
-			            <user-name>root</user-name>
-			            <password>Jhonatan</password>
-			        </security>
-			    </datasource>
+                    <connection-url>jdbc:mysql://localhost:3306/loteria?useSSL=false&amp;serverTimezone=UTC</connection-url>
+                    <driver>mysql</driver>
+                    <security>
+                        <user-name>root</user-name>
+                        <password>Jhonatan</password>
+                    </security>
+                </datasource>
                 <drivers>
                     <driver name="h2" module="com.h2database.h2">
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
                     </driver>
                     <driver name="mysql" module="com.mysql">
-			            <xa-datasource-class>com.mysql.cj.jdbc.MysqlXADataSource</xa-datasource-class>
-			        </driver>
+                        <xa-datasource-class>com.mysql.cj.jdbc.MysqlXADataSource</xa-datasource-class>
+                    </driver>
                 </drivers>
             </datasources>
         </subsystem>
