@@ -20,6 +20,8 @@ public abstract class ConcursoDTO extends BaseDTO {
 
 	private Short numero;
 	
+	private boolean acumulado;
+	
 	private LocalDate dataProximoConcurso;
 	
 	private Short numeroConcursoAnterior;
@@ -28,6 +30,12 @@ public abstract class ConcursoDTO extends BaseDTO {
 	
 	private ModalidadeEnum modalidade;
 	
+	private BigDecimal valorAcumuladoConcursoEspecial;
+	
+	private BigDecimal valorAcumuladoProximoConcurso;
+	
 	private BigDecimal valorArrecadado;
+	
+	private BigDecimal valorEstimadoProximoConcurso;
 	
 }

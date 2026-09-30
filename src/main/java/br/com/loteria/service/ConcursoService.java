@@ -7,7 +7,7 @@ import javax.ejb.Local;
 import javax.ejb.Stateless;
 
 import br.com.loteria.entidade.ConcursoLotofacil;
-import br.com.loteria.repository.local.ConcursoRepositoryLocal;
+import br.com.loteria.repository.local.ConcursoLotofacilRepositoryLocal;
 import br.com.loteria.service.local.ConcursoServiceLocal;
 
 
@@ -16,7 +16,7 @@ import br.com.loteria.service.local.ConcursoServiceLocal;
 public class ConcursoService implements ConcursoServiceLocal {
 
 	@EJB
-	private ConcursoRepositoryLocal concursoRepository;
+	private ConcursoLotofacilRepositoryLocal concursoRepository;
 	
 	@Override
 	public boolean isConcursoSalvo(Short numeroConcurso) {

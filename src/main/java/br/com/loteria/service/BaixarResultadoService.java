@@ -76,7 +76,11 @@ public class BaixarResultadoService implements BaixarResultadoServiceLocal {
         concurso.setNumeroConcursoAnterior(dto.getNumeroConcursoAnterior());
         concurso.setNumeroConcursoProximo(dto.getNumeroConcursoProximo());
         concurso.setModalidade(dto.getModalidade());
+        concurso.setValorAcumuladoConcursoEspecial(dto.getValorAcumuladoConcursoEspecial());
+        concurso.setValorAcumuladoProximoConcurso(dto.getValorAcumuladoProximoConcurso());
+        concurso.setValorEstimadoProximoConcurso(dto.getValorEstimadoProximoConcurso());
         concurso.setValorArrecadado(dto.getValorArrecadado());
+        concurso.setAcumulado(dto.isAcumulado());
 
         SorteioLotofacil sorteio = new SorteioLotofacil();
 

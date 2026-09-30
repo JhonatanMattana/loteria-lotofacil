@@ -7,13 +7,11 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import br.com.loteria.entidade.ConcursoLotofacil;
-import br.com.loteria.enums.HttpErrorStatusEnum;
-import br.com.loteria.exception.LoteriaException;
-import br.com.loteria.repository.local.ConcursoRepositoryLocal;
+import br.com.loteria.repository.local.ConcursoLotofacilRepositoryLocal;
 
 @Stateless
-@Local(ConcursoRepositoryLocal.class)
-public class ConcursoRepository implements ConcursoRepositoryLocal {
+@Local(ConcursoLotofacilRepositoryLocal.class)
+public class ConcursoLotofacilRepository implements ConcursoLotofacilRepositoryLocal {
 	
 	@PersistenceContext
     private EntityManager entityManager;
@@ -44,7 +42,7 @@ public class ConcursoRepository implements ConcursoRepositoryLocal {
                     .getSingleResult();
 
         } catch (NoResultException e) {
-            throw new LoteriaException(e.getMessage(), HttpErrorStatusEnum.NOT_FOUND);
+            return null;
         }
 	}
 	

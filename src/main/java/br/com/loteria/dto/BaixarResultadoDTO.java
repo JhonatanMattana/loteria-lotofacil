@@ -23,6 +23,8 @@ public class BaixarResultadoDTO implements Serializable {
 	
 	private Short numero;
 	
+	private boolean acumulado;
+	
     private List<Byte> listaDezenas;
     
     private List<Byte> dezenasSorteadasOrdemSorteio;
@@ -41,7 +43,13 @@ public class BaixarResultadoDTO implements Serializable {
 
 	private Short numeroConcursoProximo;
 	
+	private BigDecimal valorAcumuladoConcursoEspecial;
+	
+	private BigDecimal valorAcumuladoProximoConcurso;
+	
 	private BigDecimal valorArrecadado;
+	
+	private BigDecimal valorEstimadoProximoConcurso;
 	
 	private String localSorteio;
 	

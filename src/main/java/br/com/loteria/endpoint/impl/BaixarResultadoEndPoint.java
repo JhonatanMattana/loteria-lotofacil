@@ -1,4 +1,4 @@
-package br.com.loteria.endpoint;
+package br.com.loteria.endpoint.impl;
 
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -9,6 +9,7 @@ import javax.ws.rs.core.Response;
 
 import br.com.loteria.dto.BaixarResultadoDTO;
 import br.com.loteria.dto.VerificarSorteioSiteDTO;
+import br.com.loteria.endpoint.IBaixarResultadoEndPoint;
 import br.com.loteria.service.local.BaixarResultadoServiceLocal;
 import io.swagger.annotations.Api;
 

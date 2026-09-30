@@ -24,6 +24,9 @@ public abstract class Concurso extends BaseEntity {
 	@Column(name = "NUMERO", nullable = false)
 	private Short numero;
 	
+	@Column(name = "ACUMULADO")
+	private boolean acumulado;
+	
 	@Column(name = "DATAPROXIMOCONCURSO")
 	private LocalDate dataProximoConcurso;
 	
@@ -37,7 +40,16 @@ public abstract class Concurso extends BaseEntity {
 	@Column(name = "MODALIDADE", nullable = false)
 	private ModalidadeEnum modalidade;
 	
+	@Column(name = "VALORACUMULADOCONCURSOESPECIAL")
+	private BigDecimal valorAcumuladoConcursoEspecial;
+	
+	@Column(name = "VALORACUMULADOPROXIMOCONCURSO")
+	private BigDecimal valorAcumuladoProximoConcurso;
+	
 	@Column(name = "VALORARRECADADO")
 	private BigDecimal valorArrecadado;
+	
+	@Column(name = "VALORESTIMADOPROXIMOCONCURSO")
+	private BigDecimal valorEstimadoProximoConcurso;
 	
 }
