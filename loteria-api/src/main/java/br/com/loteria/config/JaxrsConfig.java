@@ -21,7 +21,12 @@ import io.swagger.jaxrs.listing.SwaggerSerializers;
 public class JaxrsConfig extends Application {
 
 	public JaxrsConfig() {
-		BeanConfig beanConfig = new BeanConfig();
+        BeanConfig beanConfig = new BeanConfig() {
+            @Override
+            public Set<Class<?>> classes() {
+                return endpointClasses();
+            }
+        };
         beanConfig.setTitle("API Loteria Lotofácil");
         beanConfig.setVersion("1.0.0");
         beanConfig.setSchemes(new String[]{"http", "https"});
@@ -38,6 +43,17 @@ public class JaxrsConfig extends Application {
         apiKeyAuth.setIn(io.swagger.models.auth.In.HEADER);
         swagger.securityDefinition("Bearer", apiKeyAuth);
     }
+
+    private static Set<Class<?>> endpointClasses() {
+        Set<Class<?>> endpoints = new HashSet<>();
+        endpoints.add(TesteEndPoint.class);
+        endpoints.add(BaixarResultadoEndPoint.class);
+        endpoints.add(DezenaSorteioLotofacilEndPoint.class);
+        endpoints.add(SorteioLotofacilEndPointImpl.class);
+        endpoints.add(AuthEndPointImpl.class);
+        endpoints.add(UsuarioEndPointImpl.class);
+        return endpoints;
+    }
     
     @Override
     public Set<Class<?>> getClasses() {
@@ -48,12 +64,7 @@ public class JaxrsConfig extends Application {
         resources.add(JacksonConfig.class);
         resources.add(LoteriaExceptionMapper.class);
         resources.add(AuthFilter.class);
-        resources.add(TesteEndPoint.class);
-        resources.add(BaixarResultadoEndPoint.class);
-        resources.add(DezenaSorteioLotofacilEndPoint.class);
-        resources.add(SorteioLotofacilEndPointImpl.class);
-        resources.add(AuthEndPointImpl.class);
-        resources.add(UsuarioEndPointImpl.class);
+        resources.addAll(endpointClasses());
 
         return resources;
     }
