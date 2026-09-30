@@ -69,6 +69,4 @@ public class JaxrsConfig extends Application {
         return resources;
     }
     
-    
-    
 }

@@ -22,4 +22,5 @@ public class UsuarioDTO implements Serializable {
 	
 	@NotEmpty
     private String senha;
+	
 }

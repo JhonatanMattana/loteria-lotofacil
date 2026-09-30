@@ -32,4 +32,5 @@ public class Usuario extends BaseEntity {
 
     @Column(name = "SENHA", nullable = false)
     private String senha;
+    
 }

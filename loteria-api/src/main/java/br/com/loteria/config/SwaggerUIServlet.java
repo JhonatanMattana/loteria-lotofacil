@@ -23,4 +23,5 @@ public class SwaggerUIServlet extends HttpServlet {
         
         resp.sendRedirect(swaggerUrl);
     }
+    
 }

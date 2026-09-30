@@ -6,11 +6,11 @@ import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 
+import br.com.loteria.api.LoteriaClient;
 import br.com.loteria.dto.BaixarResultadoDTO;
 import br.com.loteria.dto.VerificarSorteioSiteDTO;
 import br.com.loteria.entidade.ConcursoLotofacil;
 import br.com.loteria.entidade.DezenaSorteioLotofacil;
-import br.com.loteria.entidade.LoteriaClient;
 import br.com.loteria.entidade.SorteioLotofacil;
 import br.com.loteria.enums.HttpErrorStatusEnum;
 import br.com.loteria.exception.LoteriaException;

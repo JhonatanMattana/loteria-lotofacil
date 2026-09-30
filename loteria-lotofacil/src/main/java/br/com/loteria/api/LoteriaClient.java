@@ -1,4 +1,4 @@
-package br.com.loteria.entidade;
+package br.com.loteria.api;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.client.Client;

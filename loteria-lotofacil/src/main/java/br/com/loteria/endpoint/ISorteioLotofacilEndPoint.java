@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 public interface ISorteioLotofacilEndPoint {
+	
 	@GET
 	@Secured
 	@Path("/buscar-por-numero")
@@ -37,4 +38,5 @@ public interface ISorteioLotofacilEndPoint {
         @ApiResponse(code = 404, message = "Ocorreu um erro ao buscar Último Sorteio Lotofacil realizado")
     })
 	public Response buscarUltimoSorteioRealizado();
+	
 }

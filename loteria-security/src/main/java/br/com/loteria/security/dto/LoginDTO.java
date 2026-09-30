@@ -17,4 +17,5 @@ public class LoginDTO implements Serializable {
 
     @NotEmpty
     private String senha;
+    
 }

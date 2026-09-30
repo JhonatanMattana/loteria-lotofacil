@@ -66,4 +66,5 @@ public class SorteioLotofacilService implements SorteioLotofacilServiceLocal {
 		
 		return dto;
 	}
+	
 }

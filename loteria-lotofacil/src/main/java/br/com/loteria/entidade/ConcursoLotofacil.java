@@ -41,4 +41,5 @@ public class ConcursoLotofacil extends Concurso {
 	    optional = true
 	)
 	private SorteioLotofacil sorteioLotofacil;
+	
 }

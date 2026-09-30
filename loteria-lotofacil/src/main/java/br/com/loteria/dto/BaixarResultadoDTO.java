@@ -54,4 +54,5 @@ public class BaixarResultadoDTO implements Serializable {
 	private String localSorteio;
 	
 	private String nomeMunicipioUFSorteio;
+	
 }
