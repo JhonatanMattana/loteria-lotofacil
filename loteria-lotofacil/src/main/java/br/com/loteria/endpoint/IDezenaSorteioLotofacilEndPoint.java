@@ -2,6 +2,7 @@ package br.com.loteria.endpoint;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import br.com.loteria.security.service.Secured;
@@ -20,7 +21,10 @@ public interface IDezenaSorteioLotofacilEndPoint {
 			@ApiResponse(code = 401, message = "Dezena Sorteio Lotofacil, acesso não autorizado"),
 			@ApiResponse(code = 404, message = "Ocorreu um erro ao buscar Dezenas Sorteio Lotofacil")
 	})
-	public Response ordemSorteio();
+	public Response ordemSorteio(
+			@QueryParam("numeroConcurso") Short numeroConcurso,
+			@QueryParam("numeroConcursoDe") Short numeroConcursoDe,
+			@QueryParam("numeroConcursoAte") Short numeroConcursoAte);
 	
 	@GET
 	@Secured
@@ -31,7 +35,10 @@ public interface IDezenaSorteioLotofacilEndPoint {
 			@ApiResponse(code = 401, message = "Dezena Sorteio Lotofacil, acesso não autorizado"),
 			@ApiResponse(code = 404, message = "Ocorreu um erro ao buscar Dezenas Sorteio Lotofacil")
 	})
-	public Response ordenadasAscendentes();
+	public Response ordenadasAscendentes(
+			@QueryParam("numeroConcurso") Short numeroConcurso,
+			@QueryParam("numeroConcursoDe") Short numeroConcursoDe,
+			@QueryParam("numeroConcursoAte") Short numeroConcursoAte);
 	
 	@GET
 	@Secured
@@ -42,6 +49,9 @@ public interface IDezenaSorteioLotofacilEndPoint {
 			@ApiResponse(code = 401, message = "Dezena Sorteio Lotofacil, acesso não autorizado"),
 			@ApiResponse(code = 404, message = "Ocorreu um erro ao buscar Dezenas Sorteio Lotofacil")
 	})
-	public Response ordenadasDescendentes();
+	public Response ordenadasDescendentes(
+			@QueryParam("numeroConcurso") Short numeroConcurso,
+			@QueryParam("numeroConcursoDe") Short numeroConcursoDe,
+			@QueryParam("numeroConcursoAte") Short numeroConcursoAte);
 	
 }

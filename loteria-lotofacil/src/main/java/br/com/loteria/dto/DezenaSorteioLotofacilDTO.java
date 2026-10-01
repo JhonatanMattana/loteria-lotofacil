@@ -14,6 +14,7 @@ public class DezenaSorteioLotofacilDTO extends DezenaSorteioDTO {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+	private Short numeroConcurso;
 
 	private SorteioLotofacilDTO sorteioLotofacil;
 	
