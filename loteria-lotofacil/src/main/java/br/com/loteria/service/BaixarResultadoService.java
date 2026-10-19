@@ -50,22 +50,31 @@ public class BaixarResultadoService implements BaixarResultadoServiceLocal {
 	}
 	
 	@Override
-	public void salvarResultado(BaixarResultadoDTO dto) {
-		validarSalvarResultado(dto);
+	public void salvarResultado(Short numeroConcurso, String modalidade) {
+		validarSalvarResultado(numeroConcurso);
+		BaixarResultadoDTO dto = lotofacilClient.buscarResultado(numeroConcurso.intValue(), modalidade);
+		validarResultadoConsultado(numeroConcurso, dto);
 		
         ConcursoLotofacil concurso = montarObjetoParaSalvar(dto);
 
         baixarResultadoRepository.salvarConcurso(concurso);
     }
 	
-	private void validarSalvarResultado(BaixarResultadoDTO dto) {
-		Optional<ConcursoLotofacil> concursoOptional = concursoService.buscarPorNumeroConcurso(dto.getNumero());
+	private void validarSalvarResultado(Short numeroConcurso) {
+		Optional<ConcursoLotofacil> concursoOptional = concursoService.buscarPorNumeroConcurso(numeroConcurso);
 		
 		if (concursoOptional.isPresent()) {
-			String message = String.format("Concurso N° \"%d\" já esta salvo.", dto.getNumero());
-			throw new LoteriaException(message, HttpErrorStatusEnum.INTERNAL_ERROR);
+			String message = String.format("Concurso N° \"%d\" já esta salvo.", numeroConcurso);
+			throw new LoteriaException(message, HttpErrorStatusEnum.CONFLICT);
 		}
 		
+	}
+
+	private void validarResultadoConsultado(Short numeroConcurso, BaixarResultadoDTO dto) {
+		if (dto == null || dto.getNumero() == null || !numeroConcurso.equals(dto.getNumero())) {
+			String message = String.format("A API da Caixa não retornou o resultado esperado para o concurso N° \"%d\".", numeroConcurso);
+			throw new LoteriaException(message, HttpErrorStatusEnum.INTERNAL_ERROR);
+		}
 	}
 
 	private ConcursoLotofacil montarObjetoParaSalvar(BaixarResultadoDTO dto) {

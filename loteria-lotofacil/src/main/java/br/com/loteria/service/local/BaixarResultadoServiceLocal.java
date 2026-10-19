@@ -6,5 +6,5 @@ import br.com.loteria.dto.VerificarSorteioSiteDTO;
 public interface BaixarResultadoServiceLocal {
 	BaixarResultadoDTO porNumeroConcurso(Integer numero, String modalidade);
 	VerificarSorteioSiteDTO verificarSorteioSite(Integer numeroConcurso, String modalidade);
-	void salvarResultado(BaixarResultadoDTO dto);
+	void salvarResultado(Short numeroConcurso, String modalidade);
 }

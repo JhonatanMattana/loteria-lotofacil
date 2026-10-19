@@ -1,6 +1,7 @@
 package br.com.loteria.endpoint;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.GET;
@@ -9,7 +10,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
-import br.com.loteria.dto.BaixarResultadoDTO;
 import br.com.loteria.security.service.Secured;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -58,7 +58,9 @@ public interface IBaixarResultadoEndPoint {
 			@ApiResponse(code = 404, message = "Ocorreu um erro ao salvar resultado")
 	})
 	public Response salvarResultado(
+			@ApiParam(value = "Número do concurso", required = true)
+			@QueryParam("numeroConcurso") @Valid @NotNull @Min(1) Short numeroConcurso,
 			@ApiParam(value = "Modalidade concurso", required = true)
-			@Valid BaixarResultadoDTO baixarResultadoDTO);
+			@QueryParam("modalidade") @Valid @NotBlank String modalidade);
 
 }
