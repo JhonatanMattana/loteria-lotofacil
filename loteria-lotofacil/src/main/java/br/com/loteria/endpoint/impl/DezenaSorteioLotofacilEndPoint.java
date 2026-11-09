@@ -1,6 +1,7 @@
 package br.com.loteria.endpoint.impl;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.QueryParam;
 import javax.ejb.EJB;
 import java.util.List;
 
@@ -25,19 +26,28 @@ public class DezenaSorteioLotofacilEndPoint implements IDezenaSorteioLotofacilEn
 	private DezenaSorteioLotofacilServiceLocal service;
 
 	@Override
-	public Response ordemSorteio(Short numeroConcurso, Short numeroConcursoDe, Short numeroConcursoAte) {
+	public Response ordemSorteio(
+			@QueryParam("numeroConcurso") Short numeroConcurso,
+			@QueryParam("numeroConcursoDe") Short numeroConcursoDe,
+			@QueryParam("numeroConcursoAte") Short numeroConcursoAte) {
 		return Response.ok(buscar(numeroConcurso, numeroConcursoDe, numeroConcursoAte,
 				OrdenacaoDezenaLotofacilEnum.ORDEM_SORTEIO)).build();
 	}
 
 	@Override
-	public Response ordenadasAscendentes(Short numeroConcurso, Short numeroConcursoDe, Short numeroConcursoAte) {
+	public Response ordenadasAscendentes(
+			@QueryParam("numeroConcurso") Short numeroConcurso,
+			@QueryParam("numeroConcursoDe") Short numeroConcursoDe,
+			@QueryParam("numeroConcursoAte") Short numeroConcursoAte) {
 		return Response.ok(buscar(numeroConcurso, numeroConcursoDe, numeroConcursoAte,
 				OrdenacaoDezenaLotofacilEnum.ASCENDENTE)).build();
 	}
 
 	@Override
-	public Response ordenadasDescendentes(Short numeroConcurso, Short numeroConcursoDe, Short numeroConcursoAte) {
+	public Response ordenadasDescendentes(
+			@QueryParam("numeroConcurso") Short numeroConcurso,
+			@QueryParam("numeroConcursoDe") Short numeroConcursoDe,
+			@QueryParam("numeroConcursoAte") Short numeroConcursoAte) {
 		return Response.ok(buscar(numeroConcurso, numeroConcursoDe, numeroConcursoAte,
 				OrdenacaoDezenaLotofacilEnum.DESCENDENTE)).build();
 	}
