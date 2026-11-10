@@ -6,6 +6,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import br.com.loteria.security.service.Secured;
+import br.com.loteria.enums.FiltroGanhadoresPremioPrincipalEnum;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -24,7 +25,9 @@ public interface IDezenaSorteioLotofacilEndPoint {
 	public Response ordemSorteio(
 			@QueryParam("numeroConcurso") Short numeroConcurso,
 			@QueryParam("numeroConcursoDe") Short numeroConcursoDe,
-			@QueryParam("numeroConcursoAte") Short numeroConcursoAte);
+			@QueryParam("numeroConcursoAte") Short numeroConcursoAte,
+			@QueryParam("teveGanhadorPremioPrincipal") Boolean teveGanhadorPremioPrincipal,
+			@QueryParam("filtroGanhadoresPremioPrincipal") FiltroGanhadoresPremioPrincipalEnum filtroGanhadoresPremioPrincipal);
 	
 	@GET
 	@Secured
@@ -38,7 +41,9 @@ public interface IDezenaSorteioLotofacilEndPoint {
 	public Response ordenadasAscendentes(
 			@QueryParam("numeroConcurso") Short numeroConcurso,
 			@QueryParam("numeroConcursoDe") Short numeroConcursoDe,
-			@QueryParam("numeroConcursoAte") Short numeroConcursoAte);
+			@QueryParam("numeroConcursoAte") Short numeroConcursoAte,
+			@QueryParam("teveGanhadorPremioPrincipal") Boolean teveGanhadorPremioPrincipal,
+			@QueryParam("filtroGanhadoresPremioPrincipal") FiltroGanhadoresPremioPrincipalEnum filtroGanhadoresPremioPrincipal);
 	
 	@GET
 	@Secured
@@ -52,6 +57,8 @@ public interface IDezenaSorteioLotofacilEndPoint {
 	public Response ordenadasDescendentes(
 			@QueryParam("numeroConcurso") Short numeroConcurso,
 			@QueryParam("numeroConcursoDe") Short numeroConcursoDe,
-			@QueryParam("numeroConcursoAte") Short numeroConcursoAte);
+			@QueryParam("numeroConcursoAte") Short numeroConcursoAte,
+			@QueryParam("teveGanhadorPremioPrincipal") Boolean teveGanhadorPremioPrincipal,
+			@QueryParam("filtroGanhadoresPremioPrincipal") FiltroGanhadoresPremioPrincipalEnum filtroGanhadoresPremioPrincipal);
 	
 }

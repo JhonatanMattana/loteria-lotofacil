@@ -1,19 +1,21 @@
 package br.com.loteria.endpoint.impl;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.QueryParam;
 import javax.ejb.EJB;
 import java.util.List;
 
-import br.com.loteria.dto.DezenaSorteioLotofacilDTO;
-import br.com.loteria.enums.OrdenacaoDezenaLotofacilEnum;
-import br.com.loteria.service.local.DezenaSorteioLotofacilServiceLocal;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import br.com.loteria.dto.DezenaSorteioLotofacilDTO;
 import br.com.loteria.endpoint.IDezenaSorteioLotofacilEndPoint;
+import br.com.loteria.enums.FiltroGanhadoresPremioPrincipalEnum;
+import br.com.loteria.enums.OrdenacaoDezenaLotofacilEnum;
+import br.com.loteria.service.local.DezenaSorteioLotofacilServiceLocal;
+
 import io.swagger.annotations.Api;
 
 @Path("/dezena-sorteio-lotofacil")
@@ -29,8 +31,11 @@ public class DezenaSorteioLotofacilEndPoint implements IDezenaSorteioLotofacilEn
 	public Response ordemSorteio(
 			@QueryParam("numeroConcurso") Short numeroConcurso,
 			@QueryParam("numeroConcursoDe") Short numeroConcursoDe,
-			@QueryParam("numeroConcursoAte") Short numeroConcursoAte) {
-		return Response.ok(buscar(numeroConcurso, numeroConcursoDe, numeroConcursoAte,
+			@QueryParam("numeroConcursoAte") Short numeroConcursoAte,
+			@QueryParam("teveGanhadorPremioPrincipal") Boolean teveGanhadorPremioPrincipal,
+			@QueryParam("filtroGanhadoresPremioPrincipal") FiltroGanhadoresPremioPrincipalEnum filtroGanhadoresPremioPrincipal) {
+		return Response.ok(buscar(numeroConcurso, numeroConcursoDe, numeroConcursoAte, teveGanhadorPremioPrincipal,
+				filtroGanhadoresPremioPrincipal,
 				OrdenacaoDezenaLotofacilEnum.ORDEM_SORTEIO)).build();
 	}
 
@@ -38,8 +43,11 @@ public class DezenaSorteioLotofacilEndPoint implements IDezenaSorteioLotofacilEn
 	public Response ordenadasAscendentes(
 			@QueryParam("numeroConcurso") Short numeroConcurso,
 			@QueryParam("numeroConcursoDe") Short numeroConcursoDe,
-			@QueryParam("numeroConcursoAte") Short numeroConcursoAte) {
-		return Response.ok(buscar(numeroConcurso, numeroConcursoDe, numeroConcursoAte,
+			@QueryParam("numeroConcursoAte") Short numeroConcursoAte,
+			@QueryParam("teveGanhadorPremioPrincipal") Boolean teveGanhadorPremioPrincipal,
+			@QueryParam("filtroGanhadoresPremioPrincipal") FiltroGanhadoresPremioPrincipalEnum filtroGanhadoresPremioPrincipal) {
+		return Response.ok(buscar(numeroConcurso, numeroConcursoDe, numeroConcursoAte, teveGanhadorPremioPrincipal,
+				filtroGanhadoresPremioPrincipal,
 				OrdenacaoDezenaLotofacilEnum.ASCENDENTE)).build();
 	}
 
@@ -47,14 +55,20 @@ public class DezenaSorteioLotofacilEndPoint implements IDezenaSorteioLotofacilEn
 	public Response ordenadasDescendentes(
 			@QueryParam("numeroConcurso") Short numeroConcurso,
 			@QueryParam("numeroConcursoDe") Short numeroConcursoDe,
-			@QueryParam("numeroConcursoAte") Short numeroConcursoAte) {
-		return Response.ok(buscar(numeroConcurso, numeroConcursoDe, numeroConcursoAte,
+			@QueryParam("numeroConcursoAte") Short numeroConcursoAte,
+			@QueryParam("teveGanhadorPremioPrincipal") Boolean teveGanhadorPremioPrincipal,
+			@QueryParam("filtroGanhadoresPremioPrincipal") FiltroGanhadoresPremioPrincipalEnum filtroGanhadoresPremioPrincipal) {
+		return Response.ok(buscar(numeroConcurso, numeroConcursoDe, numeroConcursoAte, teveGanhadorPremioPrincipal,
+				filtroGanhadoresPremioPrincipal,
 				OrdenacaoDezenaLotofacilEnum.DESCENDENTE)).build();
 	}
 
 	private List<DezenaSorteioLotofacilDTO> buscar(Short numeroConcurso, Short numeroConcursoDe,
-			Short numeroConcursoAte, OrdenacaoDezenaLotofacilEnum ordenacao) {
-		return service.buscarDezenas(numeroConcurso, numeroConcursoDe, numeroConcursoAte, ordenacao);
+			Short numeroConcursoAte, Boolean teveGanhadorPremioPrincipal,
+			FiltroGanhadoresPremioPrincipalEnum filtroGanhadoresPremioPrincipal,
+			OrdenacaoDezenaLotofacilEnum ordenacao) {
+		return service.buscarDezenas(numeroConcurso, numeroConcursoDe, numeroConcursoAte,
+				teveGanhadorPremioPrincipal, filtroGanhadoresPremioPrincipal, ordenacao);
 	}
 
 }

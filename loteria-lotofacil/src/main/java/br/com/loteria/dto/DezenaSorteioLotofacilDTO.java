@@ -15,6 +15,7 @@ public class DezenaSorteioLotofacilDTO extends DezenaSorteioDTO {
 
 	private Long id;
 	private Short numeroConcurso;
+	private Boolean teveGanhadorPremioPrincipal;
 
 	private SorteioLotofacilDTO sorteioLotofacil;
 	

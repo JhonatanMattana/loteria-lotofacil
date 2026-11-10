@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 
 import br.com.loteria.dto.DezenaSorteioLotofacilDTO;
 import br.com.loteria.entidade.DezenaSorteioLotofacil;
+import br.com.loteria.enums.FiltroGanhadoresPremioPrincipalEnum;
 import br.com.loteria.enums.HttpErrorStatusEnum;
 import br.com.loteria.enums.OrdenacaoDezenaLotofacilEnum;
 import br.com.loteria.exception.LoteriaException;
@@ -24,9 +25,19 @@ public class DezenaSorteioLotofacilService implements DezenaSorteioLotofacilServ
 
 	@Override
 	public List<DezenaSorteioLotofacilDTO> buscarDezenas(Short numeroConcurso, Short numeroConcursoDe,
-			Short numeroConcursoAte, OrdenacaoDezenaLotofacilEnum ordenacao) {
+			Short numeroConcursoAte, Boolean teveGanhadorPremioPrincipal,
+			FiltroGanhadoresPremioPrincipalEnum filtroGanhadoresPremioPrincipal,
+			OrdenacaoDezenaLotofacilEnum ordenacao) {
 		validarFiltros(numeroConcurso, numeroConcursoDe, numeroConcursoAte);
-		return repository.buscarDezenas(numeroConcurso, numeroConcursoDe, numeroConcursoAte, ordenacao)
+		if (filtroGanhadoresPremioPrincipal != null
+				&& filtroGanhadoresPremioPrincipal != FiltroGanhadoresPremioPrincipalEnum.TODOS
+				&& !Boolean.TRUE.equals(teveGanhadorPremioPrincipal)) {
+			throw new LoteriaException(
+					"O filtro por quantidade de ganhadores exige selecionar concursos com ganhadores.",
+					HttpErrorStatusEnum.BAD_REQUEST);
+		}
+		return repository.buscarDezenas(numeroConcurso, numeroConcursoDe, numeroConcursoAte,
+				teveGanhadorPremioPrincipal, filtroGanhadoresPremioPrincipal, ordenacao)
 				.stream().map(this::converterParaDTO).collect(Collectors.toList());
 	}
 
@@ -54,7 +65,11 @@ public class DezenaSorteioLotofacilService implements DezenaSorteioLotofacilServ
 		dto.setDezena(entidade.getDezena());
 		dto.setOrdem(entidade.getOrdem());
 		dto.setDataSorteio(entidade.getDataSorteio());
-		dto.setNumeroConcurso(entidade.getSorteioLotofacil().getConcursoLotofacil().getNumero());
+		var concurso = entidade.getSorteioLotofacil().getConcursoLotofacil();
+		dto.setNumeroConcurso(concurso.getNumero());
+		dto.setTeveGanhadorPremioPrincipal(concurso.getTeveGanhadorPremioPrincipal() != null
+				? concurso.getTeveGanhadorPremioPrincipal()
+				: !concurso.isAcumulado());
 		return dto;
 	}
 }

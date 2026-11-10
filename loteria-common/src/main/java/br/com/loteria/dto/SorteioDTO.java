@@ -24,6 +24,8 @@ public abstract class SorteioDTO extends BaseDTO {
 	private String nomeMunicipioUFSorteio;
 	
 	private LocalDate dataApuracao;
+
+	private String diaApuracao;
 	
 	private ModalidadeEnum modalidade;
 	

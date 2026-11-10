@@ -54,5 +54,21 @@ public class BaixarResultadoDTO implements Serializable {
 	private String localSorteio;
 	
 	private String nomeMunicipioUFSorteio;
+
+	private List<ListaRateioPremioDTO> listaRateioPremio;
+
+	public Boolean getTeveGanhadorPremioPrincipal() {
+		if (listaRateioPremio == null) {
+			return acumulado ? Boolean.FALSE : Boolean.TRUE;
+		}
+
+		return listaRateioPremio.stream()
+				.filter(rateio -> Integer.valueOf(1).equals(rateio.getFaixa()))
+				.map(ListaRateioPremioDTO::getNumeroDeGanhadores)
+				.filter(numeroDeGanhadores -> numeroDeGanhadores != null)
+				.findFirst()
+				.map(numeroDeGanhadores -> numeroDeGanhadores > 0)
+				.orElse(!acumulado);
+	}
 	
 }

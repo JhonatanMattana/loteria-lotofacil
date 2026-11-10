@@ -10,6 +10,7 @@
         <class>br.com.loteria.entidade.ConcursoLotofacil</class>
         <class>br.com.loteria.entidade.SorteioLotofacil</class>
         <class>br.com.loteria.entidade.DezenaSorteioLotofacil</class>
+        <class>br.com.loteria.entidade.ListaRateioPremioLotofacil</class>
 
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>

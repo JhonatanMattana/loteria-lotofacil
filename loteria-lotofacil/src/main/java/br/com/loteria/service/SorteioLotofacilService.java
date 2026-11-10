@@ -49,6 +49,7 @@ public class SorteioLotofacilService implements SorteioLotofacilServiceLocal {
 		dto.setLocalSorteio(entidade.getLocalSorteio());
 		dto.setNomeMunicipioUFSorteio(entidade.getNomeMunicipioUFSorteio());
 		dto.setDataApuracao(entidade.getDataApuracao());
+		dto.setDiaApuracao(entidade.getDiaApuracao());
 		dto.setModalidade(entidade.getModalidade());
 		
 		List<DezenaSorteioLotofacilDTO> listaDezenaSorteioDto = new ArrayList<>();

@@ -11,6 +11,7 @@ import br.com.loteria.dto.BaixarResultadoDTO;
 import br.com.loteria.dto.VerificarSorteioSiteDTO;
 import br.com.loteria.entidade.ConcursoLotofacil;
 import br.com.loteria.entidade.DezenaSorteioLotofacil;
+import br.com.loteria.entidade.ListaRateioPremioLotofacil;
 import br.com.loteria.entidade.SorteioLotofacil;
 import br.com.loteria.enums.HttpErrorStatusEnum;
 import br.com.loteria.exception.LoteriaException;
@@ -90,13 +91,27 @@ public class BaixarResultadoService implements BaixarResultadoServiceLocal {
         concurso.setValorEstimadoProximoConcurso(dto.getValorEstimadoProximoConcurso());
         concurso.setValorArrecadado(dto.getValorArrecadado());
         concurso.setAcumulado(dto.isAcumulado());
+        concurso.setTeveGanhadorPremioPrincipal(dto.getTeveGanhadorPremioPrincipal());
+
+        if (dto.getListaRateioPremio() != null) {
+            dto.getListaRateioPremio().forEach(rateioDto -> {
+                ListaRateioPremioLotofacil rateio = new ListaRateioPremioLotofacil();
+                rateio.setFaixa(rateioDto.getFaixa());
+                rateio.setDescricaoFaixa(rateioDto.getDescricaoFaixa());
+                rateio.setNumeroDeGanhadores(rateioDto.getNumeroDeGanhadores());
+                rateio.setValorPremio(rateioDto.getValorPremio());
+                concurso.addRateioPremioLotofacil(rateio);
+            });
+        }
 
         SorteioLotofacil sorteio = new SorteioLotofacil();
 
         sorteio.setNumero(dto.getNumero());
         sorteio.setLocalSorteio(dto.getLocalSorteio());
         sorteio.setNomeMunicipioUFSorteio(dto.getNomeMunicipioUFSorteio());
-        sorteio.setDataApuracao(DateUtil.converterParaLocalDate(dto.getDataApuracao()));
+        var dataApuracao = DateUtil.converterParaLocalDate(dto.getDataApuracao());
+        sorteio.setDataApuracao(dataApuracao);
+        sorteio.setDiaApuracao(DateUtil.obterDiaDaSemana(dataApuracao));
         sorteio.setModalidade(dto.getModalidade());
 
         concurso.setSorteioLotofacil(sorteio);
